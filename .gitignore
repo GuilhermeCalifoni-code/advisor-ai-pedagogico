@@ -1,0 +1,10 @@
+# Pastas pesadas
+node_modules/
+.venv/
+__pycache__/
+
+# Arquivos secretos
+.env
+
+# Arquivos gerados pelo sistema
+*.docx
