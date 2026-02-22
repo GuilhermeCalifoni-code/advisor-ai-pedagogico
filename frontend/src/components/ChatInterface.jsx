@@ -61,7 +61,7 @@ const ChatInterface = () => {
     setLoading(true);
 
     try {
-      const response = await axios.post('http://localhost:8000/api/chat', {
+      const response = await axios.post('https://advisor-backend-hk9e.onrender.com/api/chat', {
         message: payloadInput || "Analise a evidência e gere o plano de ação.", current_doc: docState,
         conversation_history: messages.map(m => ({ role: m.role, content: typeof m.content === 'object' ? '[Mídia Visual]' : m.content })), 
         user_name: "Coordenador", attachment: payloadAttachment
@@ -136,7 +136,7 @@ const ChatInterface = () => {
       {/* DIREITA: O PLANO DE AÇÃO */}
       <div className="flex-1 flex flex-col h-full bg-slate-100 relative items-center">
          <div className="w-full h-16 flex items-center justify-end px-8 z-30 flex-shrink-0">
-          <button onClick={() => axios.post('http://localhost:8000/api/download', docState, { responseType: 'blob' }).then(r => {
+          <button onClick={() => axios.post('https://advisor-backend-hk9e.onrender.com/api/download', docState, { responseType: 'blob' }).then(r => {
              const url = window.URL.createObjectURL(new Blob([r.data]));
              const link = document.createElement('a'); link.href = url; link.setAttribute('download', `PlanoAcao_${docState.professor.replace(/\s+/g, '_') || 'Docente'}.docx`); document.body.appendChild(link); link.click();
           })} className="flex items-center gap-2 bg-indigo-600 text-white border border-indigo-700 px-5 py-2.5 rounded-xl text-sm font-bold shadow-md transition-all hover:shadow-lg hover:bg-indigo-700">
